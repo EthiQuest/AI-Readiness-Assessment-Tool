@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: ai-readiness-assessment
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn backend:create_app()
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ai-readiness-db
+          property: connectionString
+
+databases:
+  - name: ai-readiness-db
+    databaseName: aireadinessdb
+    user: aireadiness
