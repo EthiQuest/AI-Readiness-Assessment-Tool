@@ -58,6 +58,7 @@ ai-readiness-assessment-tool/
 │       └── assessment_service.py
 ├── frontend/
 │   └── index.html
+│   └── script.js
 │   └── report.js
 │   └── premium-report.js
 │   └── styles.css
