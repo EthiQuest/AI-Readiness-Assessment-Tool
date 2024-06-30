@@ -40,6 +40,34 @@ The AI Readiness Assessment Tool is a web-based application designed to help org
 
 We welcome contributions to improve the AI Readiness Assessment Tool. Please feel free to submit issues, fork the repository and send pull requests!
 
+
+## Structure Of Code Library
+```
+ai-readiness-assessment-tool/
+├── backend/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── models.py
+│   ├── utils.py
+│   ├── routes/
+│   │   ├── __init__.py
+│   │   ├── main.py
+│   │   └── assessment.py
+│   └── services/
+│       ├── __init__.py
+│       └── assessment_service.py
+├── frontend/
+│   └── ... (frontend files)
+├── templates/
+│   └── ... (template files)
+├── .gitignore
+├── README.md
+├── app.py
+├── run.py
+├── requirements.txt  <-- Place it here
+└── render.yaml
+```
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
