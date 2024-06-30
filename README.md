@@ -64,7 +64,7 @@ ai-readiness-assessment-tool/
 ├── README.md
 ├── app.py
 ├── run.py
-├── requirements.txt  <-- Place it here
+├── requirements.txt
 └── render.yaml
 ```
 
