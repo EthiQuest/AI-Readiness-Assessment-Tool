@@ -57,9 +57,13 @@ ai-readiness-assessment-tool/
 │       ├── __init__.py
 │       └── assessment_service.py
 ├── frontend/
-│   └── ... (frontend files)
+│   └── index.html
+│   └── report.js
+│   └── premium-report.js
+│   └── styles.css
 ├── templates/
-│   └── ... (template files)
+│   └── free_report.html
+│   └── premium_report.html
 ├── .gitignore
 ├── README.md
 ├── app.py
