@@ -1,29 +1,34 @@
 import torch
 from torch.utils.data import DataLoader
-from torch.optim import Adam
-from .model import AIReadinessLLM
-from .dataset import AIReadinessDataset
+from torch.optim import AdamW
+from .model import AIEthicsModel
+from .dataset import AIEthicsDataset
+from .tokenizer import tokenizer
 
-def train_model(model, train_dataset, val_dataset, epochs=10, batch_size=32, learning_rate=0.001):
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.to(device)
+def train_model(train_csv, val_csv, epochs=10, batch_size=32, learning_rate=2e-5):
+    train_dataset = AIEthicsDataset(train_csv)
+    val_dataset = AIEthicsDataset(val_csv)
 
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=batch_size)
 
-    criterion = torch.nn.CrossEntropyLoss()
-    optimizer = Adam(model.parameters(), lr=learning_rate)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = AIEthicsModel(num_labels=len(train_dataset.principles)).to(device)
+
+    optimizer = AdamW(model.parameters(), lr=learning_rate)
+    criterion = nn.CrossEntropyLoss()
 
     for epoch in range(epochs):
         model.train()
         total_loss = 0
         for batch in train_loader:
-            inputs = batch['input_ids'].to(device)
-            labels = batch['label'].to(device)
+            input_ids = batch['input_ids'].to(device)
+            attention_mask = batch['attention_mask'].to(device)
+            labels = batch['labels'].to(device)
 
             optimizer.zero_grad()
-            outputs, _ = model(inputs)
-            loss = criterion(outputs.view(-1, outputs.size(-1)), labels.view(-1))
+            outputs = model(input_ids, attention_mask)
+            loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
 
@@ -32,18 +37,28 @@ def train_model(model, train_dataset, val_dataset, epochs=10, batch_size=32, lea
         # Validation
         model.eval()
         val_loss = 0
+        correct = 0
+        total = 0
         with torch.no_grad():
             for batch in val_loader:
-                inputs = batch['input_ids'].to(device)
-                labels = batch['label'].to(device)
-                outputs, _ = model(inputs)
-                loss = criterion(outputs.view(-1, outputs.size(-1)), labels.view(-1))
+                input_ids = batch['input_ids'].to(device)
+                attention_mask = batch['attention_mask'].to(device)
+                labels = batch['labels'].to(device)
+
+                outputs = model(input_ids, attention_mask)
+                loss = criterion(outputs, labels)
                 val_loss += loss.item()
 
-        print(f"Epoch {epoch+1}/{epochs}, Train Loss: {total_loss/len(train_loader):.4f}, Val Loss: {val_loss/len(val_loader):.4f}")
+                _, predicted = torch.max(outputs, 1)
+                total += labels.size(0)
+                correct += (predicted == labels).sum().item()
+
+        print(f"Epoch {epoch+1}/{epochs}, Train Loss: {total_loss/len(train_loader):.4f}, Val Loss: {val_loss/len(val_loader):.4f}, Val Accuracy: {100 * correct / total:.2f}%")
 
     return model
 
+# Usage example:
+# model = train_model('path_to_train.csv', 'path_to_val.csv')
 # Example usage (don't include this in the file):
 # vocab_size = 10000  # This should match your actual vocabulary size
 # model = AIReadinessLLM(vocab_size=vocab_size, embed_size=256, hidden_size=512, num_layers=2)
