@@ -41,7 +41,8 @@ The AI Readiness Assessment Tool is a web-based application designed to help org
 We welcome contributions to improve the AI Readiness Assessment Tool. Please feel free to submit issues, fork the repository and send pull requests!
 
 
-## Structure Of Code Library
+## Structure Of Code 
+
 ```
 ai-readiness-assessment-tool/
 ├── backend/
@@ -53,18 +54,42 @@ ai-readiness-assessment-tool/
 │   │   ├── __init__.py
 │   │   ├── main.py
 │   │   └── assessment.py
-│   └── services/
+│   ├── services/
+│   │   ├── __init__.py
+│   │   ├── assessment_service.py
+│   │   ├── llm_service.py              # New: For custom LLM operations
+│   │   └── ai_integration_service.py   # New: For Azure/Anthropic integrations
+│   ├── llm/                            # New: Custom LLM development
+│   │   ├── __init__.py
+│   │   ├── model.py
+│   │   ├── dataset.py
+│   │   └── train.py
+│   └── ai_integration/                 # New: AI service integrations
 │       ├── __init__.py
-│       └── assessment_service.py
+│       ├── azure_openai.py
+│       └── anthropic_claude.py
 ├── frontend/
-│   └── index.html
-│   └── script.js
-│   └── report.js
-│   └── premium-report.js
-│   └── styles.css
+│   ├── index.html
+│   ├── script.js
+│   ├── report.js
+│   ├── premium-report.js
+│   ├── styles.css
+│   └── dashboard/                      # New: For advanced visualizations
+│       ├── dashboard.js
+│       └── dashboard.css
 ├── templates/
-│   └── free_report.html
-│   └── premium_report.html
+│   ├── free_report.html
+│   ├── premium_report.html
+│   └── comparative_report.html         # New: For comparing assessment results
+├── data/                               # New: For storing datasets
+│   ├── raw/
+│   └── processed/
+├── models/                             # New: For storing model checkpoints
+│   └── checkpoints/
+├── tests/                              # Expanded test directory
+│   ├── test_assessment_service.py
+│   ├── test_llm_service.py
+│   └── test_ai_integration_service.py
 ├── .gitignore
 ├── README.md
 ├── app.py
