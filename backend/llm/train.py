@@ -49,4 +49,4 @@ def train_model(model, train_dataset, val_dataset, epochs=10, batch_size=32, lea
 # model = AIReadinessLLM(vocab_size=vocab_size, embed_size=256, hidden_size=512, num_layers=2)
 # train_dataset = AIReadinessDataset('path_to_train_data.csv', tokenizer)
 # val_dataset = AIReadinessDataset('path_to_val_data.csv', tokenizer)
-# trained_model = train_model(model, train_dataset, val_dataset)
+# trained_model = train_model(model, train_dataset, val_dataset) 
