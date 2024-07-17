@@ -77,6 +77,9 @@ ai-readiness-assessment-tool/
 │   └── dashboard/                      # New: For advanced visualizations
 │       ├── dashboard.js
 │       └── dashboard.css
+├── data/
+│   └── ethics_assessment/
+│       └── ai_ethics_dataset.csv
 ├── templates/
 │   ├── free_report.html
 │   ├── premium_report.html
