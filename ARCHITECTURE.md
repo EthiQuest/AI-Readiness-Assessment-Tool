@@ -51,7 +51,6 @@ While BERT serves our current needs effectively, we remain open to exploring oth
 
 By choosing BERT, we have established a strong foundation for our AI Ethics Assessment Tool that prioritizes security, customization, and ethical considerations.
 
-# - - - o o o - - -
 
 # AI-RQ Readiness Assessment Tool Architecture
 
