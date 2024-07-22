@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Readiness Assessment</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>AI Readiness Assessment</h1>
+    </header>
+    
+    <main>
+        <section id="assessment-intro">
+            <h2>Evaluate Your Organization's AI Readiness</h2>
+            <p>This assessment will help you understand your organization's preparedness for AI adoption across six key dimensions.</p>
+        </section>
 
+        <section id="assessment-form">
+            <form id="ai-readiness-form">
+                <!-- We'll add form fields dynamically with JavaScript -->
+            </form>
+        </section>
+
+        <section id="results" class="hidden">
+            <h2>Your AI Readiness Results</h2>
+            <canvas id="radar-chart"></canvas>
+            <div id="score-summary"></div>
+            <button id="generate-report">Generate Free Report</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 AI Readiness Assessment Tool. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
